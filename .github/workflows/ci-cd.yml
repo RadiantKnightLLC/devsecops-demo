@@ -1,5 +1,9 @@
 name: CI/CD Pipeline # Adding version 1.0
 
+permissions:
+  contents: write
+  packages: write
+
 on:
   push:
     branches: [main]
@@ -155,7 +159,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Git config
         run: |
