@@ -1,7 +1,7 @@
 name: CI/CD Pipeline # Adding version 1.0
 
 permissions:
-  contents: write
+  contents: read
   packages: write
 
 on:
