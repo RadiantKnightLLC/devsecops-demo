@@ -8,6 +8,7 @@ spec:
       containers:
         - name: tic-tac-toe
           image: ghcr.io/radiantknightllc/devsecops-demo:prod-latest # Prod-specific image
+          imagePullPolicy: Always
           resources:
             limits:
               cpu: "1"

@@ -9,3 +9,10 @@ spec:
         - name: tic-tac-toe
           image: ghcr.io/radiantknightllc/devsecops-demo:dev-latest # Dev-specific image
           imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: "0.5"
+              memory: "512Mi"
+            requests:
+              cpu: "0.25"
+              memory: "256Mi"
