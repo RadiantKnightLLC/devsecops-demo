@@ -84,7 +84,6 @@ jobs:
     env:
       REGISTRY: ghcr.io
       IMAGE_NAME: ${{ github.repository }}
-      GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     outputs:
       image_tag: ${{ steps.set_output.outputs.image_tag }}
     steps:
