@@ -180,7 +180,7 @@ jobs:
       - name: Set environment-specific variables
         run: |
           echo "NAMESPACE=dev" >> $GITHUB_ENV  # Adjust based on the environment (dev, staging, prod)
-          echo "DEPLOYMENT_PATH=kubernetes/${{ env.NAMESPACE }}/deployment.yaml" >> $GITHUB_ENV
+          echo "DEPLOYMENT_PATH=kubernetes/base/deployment.yaml" >> $GITHUB_ENV
           echo "KUSTOMIZATION_PATH=kubernetes/${{ env.NAMESPACE }}/kustomization.yaml" >> $GITHUB_ENV
           echo "PATCH_PATH=kubernetes/${{ env.NAMESPACE }}/patch.yaml" >> $GITHUB_ENV
           echo "NAMESPACE_PATH=kubernetes/${{ env.NAMESPACE }}/namespace.yaml" >> $GITHUB_ENV
@@ -192,12 +192,12 @@ jobs:
           REGISTRY: ghcr.io
         run: |
           NEW_IMAGE="${REGISTRY}/${GITHUB_REPOSITORY}:${IMAGE_TAG}"
-          sed -i "s|image: ${REGISTRY}/.*|image: ${NEW_IMAGE}|g" kubernetes/${{ env.NAMESPACE }}/deployment.yaml
+          sed -i "s|image: ${REGISTRY}/.*|image: ${NEW_IMAGE}|g" ${{ env.DEPLOYMENT_PATH }}
           echo "Updated deployment to use image: ${NEW_IMAGE}"
-          grep -A 1 "image:" kubernetes/${{ env.NAMESPACE }}/deployment.yaml
+          grep -A 1 "image:" ${{ env.DEPLOYMENT_PATH }}
 
       - name: Commit and push changes
         run: |
-          git add kubernetes/${{ env.NAMESPACE }}/deployment.yaml
+          git add ${{ env.DEPLOYMENT_PATH }}
           git commit -m "Update Kubernetes deployment with new image tag: ${{ needs.docker.outputs.image_tag }} [skip ci]" || echo "No changes to commit"
           git push
