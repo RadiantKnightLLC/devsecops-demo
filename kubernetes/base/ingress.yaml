@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: tic-tac-toe-ingress
 spec:
-  ingressClassName: nginx # Make sure nginx Ingress Controller is installed
+  ingressClassName: nginx
   rules:
     - host: tic-tac-toe.example.com # Replace with your actual domain
       http:
@@ -15,8 +15,3 @@ spec:
                 name: tic-tac-toe
                 port:
                   number: 80
-  # Uncomment and configure if you want TLS
-  # tls:
-  # - hosts:
-  #   - tic-tac-toe.example.com
-  #   secretName: tic-tac-toe-tls

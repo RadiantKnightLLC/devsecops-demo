@@ -3,12 +3,10 @@ kind: Service
 metadata:
   name: tic-tac-toe
 spec:
-  type: NodePort # Change from ClusterIP to NodePort
+  type: ClusterIP
   selector:
     app: tic-tac-toe
   ports:
     - protocol: TCP
       port: 80 # Internal Cluster Port
       targetPort: 80
-      nodePort: 30007 # External Port (in range 30000-32767)
-
