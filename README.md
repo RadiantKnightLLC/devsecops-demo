@@ -40,7 +40,7 @@ Integrated with GitHub Actions, our CI/CD pipeline automates testing, building, 
   - Validates TypeScript types and builds the application
   - Runs on every pull request and commit to main branch
 
-  (public/CI-CD.png)
+  ![GitHub Action Build](public/CI-CD.png)
 
 - **Continuous Deployment**:
 
