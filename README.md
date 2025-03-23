@@ -1,54 +1,67 @@
-# React + TypeScript + Vite
+## Application Overview
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The Tic-Tac-Toe app provides an engaging experience with a clean, minimalist interface, allowing players to enjoy the classic game of tic-tac-toe right in their browser. Leveraging the powerful combination of React for a component-driven architecture and TypeScript for type safety, this app is both performant and maintainable.
 
-Currently, two official plugins are available:
+## Multi-Environment Configuration
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Our application is designed to operate seamlessly across multiple environments:
 
-## Expanding the ESLint configuration
+- **Development**:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+  - Frequent deployments with minimal resource allocation
+  - Debugging tools and verbose logging enabled
+  - Automatic reloading for rapid testing and feedback
+  - Namespace: `tictactoe-dev`
+  - Resource limits: 0.5 CPU, 512Mi memory
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **Staging**:
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+  - Near-production environment for final testing and validation
+  - Mirrors production settings without affecting live operations
+  - Connected to test databases and services
+  - Namespace: `tictactoe-staging`
+  - Resource limits: 1 CPU, 1Gi memory
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Production**:
+  - Optimized for performance and stability
+  - Enhanced security measures and monitoring
+  - Scaled for handling real user traffic
+  - Namespace: `tictactoe-prod`
+  - Resource limits: 2 CPU, 2Gi memory
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## CI/CD Pipeline
+
+Integrated with GitHub Actions, our CI/CD pipeline automates testing, building, and deploying processes. The pipeline ensures every change is rigorously tested across all environments:
+
+- **Continuous Integration**:
+
+  - Automatically runs unit tests and static analysis
+  - Enforces code quality with ESLint and Prettier
+  - Validates TypeScript types and builds the application
+  - Runs on every pull request and commit to main branch
+
+  (public/CI-CD.png)
+
+- **Continuous Deployment**:
+
+  - Uses Docker to build and push images to GHCR (GitHub Container Registry)
+  - Tags images with commit SHA and environment name
+  - Deploys to Kubernetes using Kustomize
+  - Progressive deployment strategy: dev → staging → production
+  - Automated rollbacks if health checks fail
+
+- **Security**:
+  - Incorporates Trivy vulnerability scans for container images
+  - Dependency scanning with Dependabot
+  - Secret scanning to prevent credential leaks
+  - SAST (Static Application Security Testing) integration
+
+## Technology Stack
+
+- **Frontend**: React with Vite for fast, efficient development experiences.
+- **Type Safety**: TypeScript offers a robust framework for type checking and improved code quality.
+- **CI/CD**: GitHub Actions orchestrates a reliable build and deployment process, from code push to production.
+
+## Get Started
+
+Clone the repository and follow setup instructions to run the application locally or explore its features online. Contributions are welcome—please refer to our coding guidelines for a cohesive development approach.
